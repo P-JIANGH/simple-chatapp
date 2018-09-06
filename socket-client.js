@@ -10,7 +10,7 @@
 //     terminal: false,
 // });
 
-// const client = io('http://localhost:8000');
+// const client = io('http://localhost:5000');
 
 // client.on('connect', () => {
 //     console.log('connected ->', client.connected);

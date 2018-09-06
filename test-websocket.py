@@ -1,13 +1,17 @@
 import asyncio
 import websockets
 
-async def hello(websocket, path):
-    recv_msg = await websocket.recv()
-    print('>>> %s' % recv_msg)
+@asyncio.coroutine
+def hello(websocket, path):
+    name = yield from websocket.recv()
+    print("< {}".format(name))
 
-    
-    await websocket.send('123')
+    greeting = "Hello {}!".format(name)
 
-start_server = websockets.serve(hello, 'localhost', 8000)
+    yield from websocket.send(greeting)
+    print("> {}".format(greeting))
+
+start_server = websockets.serve(hello, '127.0.0.1', 5000)
+
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
